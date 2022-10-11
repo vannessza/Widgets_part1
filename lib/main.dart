@@ -7,10 +7,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: WidgetsPart1());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Flutter Demo",
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => WidgetsPart1(),
+          Bookingform.routeName: (context) => Bookingform(),
+          WidgetsPart1.routeName: (context) => WidgetsPart1()
+        });
   }
 }

@@ -1,7 +1,9 @@
 part of 'pages.dart';
 
 class WidgetsPart1 extends StatefulWidget {
-  const WidgetsPart1({super.key});
+  const WidgetsPart1({Key? key}) : super(key: key);
+  static const String routeName = '/WidgetsPart1';
+
   @override
   _WidgetsPart1State createState() => _WidgetsPart1State();
 }
@@ -240,9 +242,54 @@ class _WidgetsPart1State extends State<WidgetsPart1> {
                             ),
                           )),
                       Flexible(
-                          child: ListView(
-                        children: widgets,
-                      ))
+                        child: Container(
+                            height: 300,
+                            child: Stack(
+                              children: [
+                                ListView(
+                                  children: widgets,
+                                ),
+                                Align(
+                                    child: Container(
+                                  margin: EdgeInsets.all(5.0),
+                                  padding: EdgeInsets.all(5.0),
+                                  alignment: Alignment.bottomRight,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, Bookingform.routeName);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30))),
+                                    child: Ink(
+                                      decoration: BoxDecoration(
+                                          gradient:
+                                              const LinearGradient(colors: [
+                                            Color.fromARGB(255, 78, 157, 221),
+                                            Color.fromARGB(255, 255, 247, 247)
+                                          ]),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Container(
+                                        width: 150,
+                                        height: 50,
+                                        alignment: Alignment.center,
+                                        child: const Text(
+                                          'Book Now',
+                                          style: const TextStyle(
+                                              fontSize: 24,
+                                              fontStyle: FontStyle.italic),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                              ],
+                            )),
+                      ),
                     ],
                   ),
                 )),
