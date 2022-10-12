@@ -96,27 +96,40 @@ class _BookingformState extends State<Bookingform> {
                   child: ElevatedButton.icon(
                       onPressed: () {
                         if (_Bookingkey.currentState!.validate()) {
-                          Fluttertoast.showToast(
-                              msg: 'Name:' +
-                                  ctrlName.text.toString() +
-                                  ', Email: ' +
-                                  ctrlEmail.text.toString() +
-                                  ', Phone:' +
-                                  ctrlPhone.text.toString() +
-                                  ', City: ' +
-                                  ctrlCity.text.toString(),
-                              toastLength: Toast.LENGTH_SHORT,
-                              fontSize: 14,
-                              backgroundColor: Colors.greenAccent,
-                              textColor: Colors.white);
-                          Navigator.pushNamed(context, WidgetsPart1.routeName);
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Booking Confirmation"),
+                                  content: Text(
+                                    'Name: ${ctrlName.text}\nEmail: ${ctrlEmail.text}\nPhone: ${ctrlPhone.text}\nCity: ${ctrlCity.text}',
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, WidgetsPart1.routeName);
+                                        },
+                                        child: Text("OK"))
+                                  ],
+                                );
+                              });
                         } else {
-                          Fluttertoast.showToast(
-                              msg: "Please fill all fields!",
-                              toastLength: Toast.LENGTH_SHORT,
-                              fontSize: 14,
-                              backgroundColor: Colors.redAccent,
-                              textColor: Colors.white);
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Booking Failed"),
+                                  content: Text("Please fill all form fields!"),
+                                  actions: <Widget>[
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Close'))
+                                  ],
+                                );
+                              });
                         }
                       },
                       icon: Icon(Icons.save),
